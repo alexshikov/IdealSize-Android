@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-20.04
+
+    steps:
+      # Check out the repository
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Set up JDK for Android
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu' # Recommended JDK for Android development
+          java-version: '17'
+
+      # Build the project
+      - name: Build Android Library
+        run: ./gradlew :idealsize:assembleDebug
+
+      # Run unit tests
+      - name: Run Unit Tests
+        run: ./gradlew :idealsize:testDebugUnitTest
+
+      # Compress Artifacts
+      # - name: Zip artifacts
+      #   run: zip -r assemble.zip . -i 'idealsize/build/*.apk' 'idealsize/build/*.aab' 'idealsize/build/*.aar' 'idealsize/build/*.so'
+      
+      # Publish Artifacts
+      # - name: Upload artifacts
+      #   uses: actions/upload-artifact@v1
+      #   with:
+      #     name: assemble
+      #     path: assemble.zip

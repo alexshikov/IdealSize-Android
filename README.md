@@ -1,3 +1,5 @@
+[![CI](https://github.com/alexshikov/IdealSize-Android/actions/workflows/ci.yml/badge.svg)](https://github.com/alexshikov/IdealSize-Android/actions/workflows/ci.yml)
+
 # Overview
 
 This is a simple SDK that recommends body size absed based on Body Mass Index (BMI).
